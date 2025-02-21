@@ -1,0 +1,11 @@
+<form [formGroup]="inputForm">
+  <label for="text-input">Input text to encrypt or cypher to decrypt</label>
+  <textarea rows="4" cols="50" id="text-input" autofocus formControlName="input" type="text" [ngClass]="{ 'invalid': inputForm.controls.input.invalid}"></textarea>
+  <div *ngIf="showTip$ | async" class="tip">Current MVP only supports lowercase a-z and space</div>
+  <div class="button-container">
+    <button type="button" (click)="encrypt()" [disabled]="!inputForm.valid">Encrypt</button>
+    <!-- <button type="button" (click)="decrypt()" [disabled]="!inputForm.valid">Decrypt</button> -->
+  </div>
+  <label for="result">Result</label>
+  <textarea id="result" [ngClass]="{ 'result': inputForm.controls.result.value}" readonly rows="4" cols="50" formControlName="result"></textarea>
+</form>  
