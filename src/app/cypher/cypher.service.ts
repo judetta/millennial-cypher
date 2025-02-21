@@ -17,7 +17,7 @@ export class CypherService {
 
   public decrypt(_cypher: string): string {
     // TODO: implement
-    throw new Error('Decryption not yet implemented.')
+    return 'Sorry, decryption is not yet implemented. Stay tuned.'
   }
 
   private findKey(letter: string): string {

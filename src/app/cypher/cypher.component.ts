@@ -44,7 +44,8 @@ export class CypherComponent implements OnDestroy {
 
   public decrypt(): void {
     if (this.inputForm.value.input) {
-      this.cypherService.decrypt(this.inputForm.value.input);
+      const result = this.cypherService.decrypt(this.inputForm.value.input);
+      this.inputForm.controls.result.patchValue(result);
     }
   }
 
