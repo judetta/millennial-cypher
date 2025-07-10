@@ -1,11 +1,12 @@
 <form [formGroup]="inputForm">
-  <label for="text-input">Input text to encrypt or cypher to decrypt</label>
-  <textarea rows="4" cols="50" id="text-input" autofocus formControlName="input" type="text" [ngClass]="{ 'invalid': inputForm.controls.input.invalid}"></textarea>
-  <div *ngIf="showTip$ | async" class="tip">Current MVP only supports lowercase a-z and space</div>
   <div class="button-container">
-    <button type="button" (click)="encrypt()" [disabled]="!inputForm.valid">Encrypt</button>
-    <button type="button" (click)="decrypt()" [disabled]="!inputForm.valid">Decrypt</button>
+    <button type="button" (click)="setMode('encrypt')" [class]="{'selected': (mode$ | async) === 'encrypt'}">Encrypt</button>
+    <button type="button" (click)="setMode('decrypt')" [class]="{'selected': (mode$ | async) === 'decrypt'}" 
+      [disabled]="true" title="Decrypt feature is not yet implemented">Decrypt</button>
   </div>
+  <label for="text-input">Input text to encrypt or cypher to decrypt</label>
+  <textarea rows="4" cols="50" id="text-input" autofocus formControlName="input" type="text" [ngClass]="{ 'invalid': inputIsInvalid$ | async}"></textarea>
+  <div *ngIf="inputIsInvalid$ | async" class="tip">{{ tipForInvalid$ | async }}</div>
   <label for="result">Result</label>
   <textarea id="result" [ngClass]="{ 'result': inputForm.controls.result.value}" readonly rows="4" cols="50" formControlName="result"></textarea>
-</form>  
+</form>
