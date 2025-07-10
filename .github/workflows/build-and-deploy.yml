@@ -1,5 +1,8 @@
 name: Build app and deploy to Pages
 
+env:
+  APP_NAME: millennial-cypher
+
 on:
   # Runs on pushes targeting the default branch
   push:
@@ -28,12 +31,12 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Build Angular app
-      run: npx ng build --base-href /millennial-cypher/
+      run: npx ng build --base-href ${{ github.event.repository.name }}
     - name: Upload build artifacts
       uses: actions/upload-pages-artifact@v3
       with:
         name: github-pages
-        path: dist/millennial-cypher/browser
+        path: dist/$APP_NAME/browser
   deploy:
     needs: build
     # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
